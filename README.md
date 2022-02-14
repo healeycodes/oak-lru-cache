@@ -1,5 +1,7 @@
 # oak-lru-cache
 
+[![CI](https://github.com/healeycodes/oak-lru-cache/actions/workflows/test.yml/badge.svg)](https://github.com/healeycodes/oak-lru-cache/actions/workflows/test.yml)
+
 A least recently used (LRU) cache written in [Oak](https://oaklang.org/).
 
 Usage:
