@@ -32,7 +32,7 @@ fn run(t) {
 	myLRU3 := lru(3)
 	myLRU3.set('a', 1)
 	myLRU3.set('a', 2)
-	t.eq('Keys can be overwritten', myLRU3.count(), 2)
+	t.eq('Keys can be overwritten', myLRU3.get('a'), 2)
 }
 
 t := test.new('LRU Cache')
