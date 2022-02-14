@@ -27,4 +27,4 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: vendor/oak-linux-v0.1 lru.test.oak
+        run: chmod +x vendor/oak-linux-v0.1 && vendor/oak-linux-v0.1 lru.test.oak
