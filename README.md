@@ -19,3 +19,9 @@ cache.get('foo')
 ```bash
 vendor/oak-linux-v0.1 lru.test.oak
 ```
+
+## Benchmarks
+
+```bash
+vendor/oak-linux-v0.1 lru.bench.oak
+```
