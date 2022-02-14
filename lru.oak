@@ -1,9 +1,4 @@
 {
-	each: each
-	println: println
-} := import('std')
-
-{
 	doublyLinkedNode: doublyLinkedNode
 	doublyLinkedList: doublyLinkedList
 	insertBeginning: insertBeginning
