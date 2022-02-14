@@ -3,54 +3,54 @@
 // on https://en.wikipedia.org/wiki/Doubly_linked_list)
 
 fn doublyLinkedNode(next, prev, data) {
-    {
-        next: next
-        prev: prev
-        data: data
-    }
+	{
+		next: next
+		prev: prev
+		data: data
+	}
 }
 
 fn doublyLinkedList(firstNode, lastNode) {
-    {
-        firstNode: firstNode
-        lastNode: lastNode
-    }
+	{
+		firstNode: firstNode
+		lastNode: lastNode
+	}
 }
 
 fn insertBefore(list, node, newNode) {
-    newNode.next := node
-    if node.prev {
-        ? -> {
-            newNode.prev := ?
-            list.firstNode := newNode
-        }
-        _ -> {
-            newNode.prev := node.prev
-            node.prev.next := newNode
-        }
-    }
-    node.prev := newNode
+	newNode.next := node
+	if node.prev {
+		? -> {
+			newNode.prev := ?
+			list.firstNode := newNode
+		}
+		_ -> {
+			newNode.prev := node.prev
+			node.prev.next := newNode
+		}
+	}
+	node.prev := newNode
 }
 
 fn insertBeginning(list, newNode) {
-    if list.firstNode {
-        ? -> {
-            list.firstNode := newNode
-            list.lastNode := newNode
-            newNode.prev := ?
-            newNode.next := ?
-        }
-        _ -> insertBefore(list, list.firstNode, newNode)
-    }
+	if list.firstNode {
+		? -> {
+			list.firstNode := newNode
+			list.lastNode := newNode
+			newNode.prev := ?
+			newNode.next := ?
+		}
+		_ -> insertBefore(list, list.firstNode, newNode)
+	}
 }
 
 fn remove(list, node) {
-    if node.prev {
-        ? -> list.firstNode := node.next
-        _ -> node.prev.next := node.next
-    }
-    if node.next {
-        ? -> list.lastNode := node.prev
-        _ -> node.next.prev := node.prev
-    }
+	if node.prev {
+		? -> list.firstNode := node.next
+		_ -> node.prev.next := node.next
+	}
+	if node.next {
+		? -> list.lastNode := node.prev
+		_ -> node.next.prev := node.prev
+	}
 }
