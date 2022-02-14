@@ -1,0 +1,36 @@
+test := import('test')
+{
+	lru: lru
+} := import('lru')
+
+
+fn run(t) {
+    myLRU := lru(2)
+
+    t.eq('Fetch missing key', myLRU.get('none'), ?)
+
+    myLRU.set('a', '1')
+    t.eq('Fetch first value by key', myLRU.get('a'), '1')
+
+    myLRU.set('b', '2')
+    t.eq('Fetch second value by key', myLRU.get('b'), '2')
+
+    myLRU.set('c', '3')
+    t.eq('Fetch third value by key', myLRU.get('c'), '3')
+
+    t.eq('Initial value should be cleaned up', myLRU.get('a'), ?)
+
+    myLRU2 := lru(3)
+    myLRU2.set('a', 1)
+    myLRU2.set('b', 2)
+    myLRU2.set('c', 3)
+    myLRU2.get('a') // Warm up 'a'
+    myLRU2.set('d', 4) // So that 'b' is removed
+    t.eq('Due to this access pattern, "b" should have been removed', myLRU2.get('b'), ?)
+    t.eq('Count is updated correctly', myLRU2.count(), 3)
+}
+
+t := test.new('LRU Cache')
+run(t)
+t.reportFailed()
+t.exit()

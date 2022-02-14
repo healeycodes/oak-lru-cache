@@ -1,0 +1,70 @@
+{
+	each: each
+	println: println
+} := import('std')
+
+{
+    doublyLinkedNode: doublyLinkedNode
+    doublyLinkedList: doublyLinkedList
+    insertBeginning: insertBeginning
+    remove: remove
+} := import('linkedList')
+
+// LRU Cache
+fn lru(max) {
+	count := 0
+	cache := {}
+    list := doublyLinkedList(?, ?)
+
+    // Remove least recently used
+	fn pop {
+		cache.(list.lastNode.data) := _
+        remove(list, list.lastNode)
+        count <- count - 1
+	}
+
+    // Apply access side-effects
+    fn access(key) {
+        remove(list, cache.(key).node)
+        insertBeginning(list, cache.(key).node)
+    }
+
+	{
+        // Set an item in the cache
+		set: fn(key, value) if cache.(key) {
+			? -> {
+				if count + 1 > max {
+					true -> {
+						pop()
+					}
+				}
+				count <- count + 1
+				cache.(key) := {
+					value: value
+                    node: doublyLinkedNode(?, ?, key)
+				}
+                insertBeginning(list, cache.(key).node)
+			}
+		}
+
+        // Get an item from the cache
+		get: fn(key) if cache.(key) {
+			? -> ?
+			_ -> {
+                access(key)
+                cache.(key).value
+            }
+		}
+
+        count: fn {
+            count
+        }
+
+        _debug: fn {
+            {
+                firstNode: list.firstNode
+                lastNode: list.lastNode
+            }
+        }
+	}
+}

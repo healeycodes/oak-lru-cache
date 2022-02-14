@@ -1,0 +1,54 @@
+{
+	lru: lru
+} := import('lru')
+{
+    each: each
+    range: range
+    println: println
+} := import('std')
+
+(fn {
+    start := time()
+    bench := lru(1)
+    bench.set('a', 'b')
+    println('Inserted 1 key in: ', (time() - start) * 1000, 'ms')
+
+    start := time()
+    bench := lru(1)
+    fn insert(i, max) {
+        if i > max {
+            false -> {
+                bench.set(i, i)
+                insert(i+1, max)
+            }
+        }
+    }
+    insert(0, 100)
+    println('Inserted 100 keys in: ', (time() - start) * 1000, 'ms')
+
+    start := time()
+    bench := lru(1)
+    fn insert(i, max) {
+        if i > max {
+            false -> {
+                bench.set(i, i)
+                insert(i+1, max)
+            }
+        }
+    }
+    insert(0, 10000)
+    println('Inserted 10000 keys in: ', (time() - start) * 1000, 'ms')
+
+    start := time()
+    bench := lru(1)
+    fn insert(i, max) {
+        if i > max {
+            false -> {
+                bench.set(i, i)
+                insert(i+1, max)
+            }
+        }
+    }
+    insert(0, 100000)
+    println('Each lru.set() call took', ((time() - start) * 1000) / 100000 , 'ms (avg)', 'over 100000 entries')
+})()
