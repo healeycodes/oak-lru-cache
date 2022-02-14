@@ -2,8 +2,6 @@
 	lru: lru
 } := import('lru')
 {
-	each: each
-	range: range
 	println: println
 } := import('std')
 
