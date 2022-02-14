@@ -31,20 +31,18 @@ fn lru(max) {
 
 	{
 		// Set an item in the cache
-		set: fn(key, value) if cache.(key) {
-			? -> {
-				if count + 1 > max {
-					true -> {
-						pop()
-					}
+		set: fn(key, value) {
+			if count + 1 > max {
+				true -> {
+					pop()
 				}
-				count <- count + 1
-				cache.(key) := {
-					value: value
-					node: doublyLinkedNode(?, ?, key)
-				}
-				insertBeginning(list, cache.(key).node)
 			}
+			count <- count + 1
+			cache.(key) := {
+				value: value
+				node: doublyLinkedNode(?, ?, key)
+			}
+			insertBeginning(list, cache.(key).node)
 		}
 
 		// Get an item from the cache
